@@ -48,6 +48,10 @@ p {
   color: var(--text);
 }
 
+.MuiIconButton-label {
+  color: var(--text);
+}
+
 h2 { 
   color: var(--heading); 
 }
@@ -79,6 +83,12 @@ h2 {
   color:black;
 }
 
+.outer-container {
+  height: 100vh;
+  /* padding-bottom: 56px; */
+  overflow: hidden;
+}
+
 @media (min-width: 960px) {
   .card__container {
       display: flex;
@@ -92,6 +102,30 @@ h2 {
 @media (max-width: 960px) {
   .card__container {
     height: 100vh;
+    height: calc(100vh - 56px);
     overflow: auto;
   }
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: ".";    
+  display: block;    
+  height: 0;    
+  overflow: hidden;        
+}
+.clearfix:after { clear: both; }
+.clearfix { zoom: 1 ;} /* IE < 8 */
+
+.MuiTypography-body2 {
+  font-size: 0.775rem !important;
+}
+
+.MuiCardContent-root {
+  padding-left: 10px !important;
+  padding-right: 0px !important;
+}
+
+.MuiCardActions-root {
+  padding-bottom: 0 !important;
 }

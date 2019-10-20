@@ -63,7 +63,8 @@ const lightTheme = [
   '--background: white',
   '--backgroundButton: transparent',
   '--backgroundNavbar: #FF7701',
-  '--backgroundBody: white'
+  '--backgroundBody: white',
+  '--cardRed: red'
 ];
 
 const darkTheme = [
@@ -78,5 +79,6 @@ const darkTheme = [
   '--background: #2D2D2D',
   '--backgroundButton: transparent',
   '--backgroundNavbar: #2D2D2D',
-  '--backgroundBody: #111111'
+  '--backgroundBody: #111111',
+  '--cardRed: maroon'
 ];

@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
-import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
+import RefreshIcon from '@material-ui/icons/Refresh';
 import ColorLensIcon from "@material-ui/icons/ColorLens";
 import LocationCityIcon from "@material-ui/icons/LocationCity";
 import Brightness4Icon from "@material-ui/icons/Brightness4";
@@ -13,7 +13,7 @@ import ThemeContext from "../Context/ThemeContext";
 const useStyles = makeStyles({
   root: {
     width: "100vw",
-    position: "absolute",
+    position: "fixed",
     bottom: 0,
     zIndex: 1,
   },
@@ -40,12 +40,6 @@ export default function BottomNavbar() {
     >
       <BottomNavigationAction
         className={classes.btnBottom}
-        label="Top"
-        value="recents"
-        icon={<ArrowUpwardIcon/>}
-      />
-      <BottomNavigationAction
-        className={classes.btnBottom}
         label="Theme"
         onClick={() => toggle()}
         value="theme"
@@ -63,6 +57,13 @@ export default function BottomNavbar() {
         label="City"
         value="nearby"
         icon={<LocationCityIcon />}
+      />
+      <BottomNavigationAction
+        className={classes.btnBottom}
+        label="Refresh"
+        value="refresh"
+        onClick={() => { window.location.reload() }}
+        icon={<RefreshIcon/>}
       />
     </BottomNavigation>
   );

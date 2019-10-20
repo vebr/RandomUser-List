@@ -21,7 +21,7 @@ const Template = ({ pageTitle, children }) => (
       <BottomNavbar />
     </Hidden>
     
-    <Container maxWidth="lg">{children}</Container>
+    <Container maxWidth="lg" className="outer-container">{children}</Container>
   </div>
 );
 
