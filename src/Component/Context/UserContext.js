@@ -1,3 +1,4 @@
+/* eslint-disable import/first */
 import * as React from "react";
 
 export const UserContext = React.createContext(
@@ -8,6 +9,7 @@ export const UserContext = React.createContext(
       users: [],
     },
     filterUsers: () => {},
+    loadMore: () => {},
     filterCity: () => {},
   }
 );
@@ -16,12 +18,13 @@ export default class UserProvider extends React.Component {
   constructor() {
     super();
     this.state = {
-      filterUsers: this.filterUsers.bind(this),
       filterCity: this.filterCity.bind(this),
-      //   setValue: this.setValue.bind(this),
-      //   addCurrency: this.addCurrency.bind(this),
-      //   removeCurrency: this.removeCurrency.bind(this),
-      users: this.users.bind(this),
+      filterUsers: this.filterUsers.bind(this),
+      fetchData: this.fetchData.bind(this),
+      loadMore: this.loadMore.bind(this),
+      users: [],
+      moreItemsLoading: false,
+      hasNextPage: true,
       defaultValue: 10,
       isFetching: false,
     };
@@ -42,9 +45,30 @@ export default class UserProvider extends React.Component {
       .catch(console.log);
   }
 
-  componentDidMount() {
-    this.fetchData();
+  async loadMore() {
+    let { users } = this.state;
+    console.log(users.length);
+    if (users.length >= 100) {
+      return null;
+    } else {
+      const response = await fetch("https://randomuser.me/api/?results=10")
+        .then(this.setState({ isFetching: true }))
+        // .then(res => res.json())
+        // .then(data => {
+        //   let { results } = data;
+        //   let { users } = this.state;
+        //   this.setState({ users: users.concat(results), isFetching: false });
+        // })
+        .catch(console.log);
+      const json = await response.json();
+      this.setState({ users: users.concat(json.results), isFetching: false });
+      console.log(users);
+    }
   }
+
+  // componentDidMount() {
+  //   this.fetchData();
+  // }
 
   filterUsers() {
     let { users } = this.state;

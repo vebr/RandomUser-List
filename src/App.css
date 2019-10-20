@@ -84,7 +84,7 @@ h2 {
 }
 
 .outer-container {
-  height: 100vh;
+  height: calc(100vh - 56px);
   /* padding-bottom: 56px; */
   overflow: hidden;
 }
@@ -94,9 +94,13 @@ h2 {
       display: flex;
       flex-wrap: nowrap;
       margin-top:2em;
+      height: auto !important;
       /* height: 70vh; */
       overflow-x: auto;
       width: auto;
+  }
+  .btn__detail {
+    display: block !important;
   }
 }
 
@@ -105,6 +109,9 @@ h2 {
     height: 100vh;
     height: calc(100vh - 56px);
     overflow: auto;
+  }
+  .btn__detail {
+    display: none !important;
   }
 }
 
@@ -129,4 +136,13 @@ h2 {
 
 .MuiCardActions-root {
   padding-bottom: 0 !important;
+}
+
+
+.inline-block {
+  display: inline-block;
+}
+
+.inline-block:has(> div) {
+  height: 200px;
 }

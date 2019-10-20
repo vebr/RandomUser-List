@@ -9,7 +9,7 @@ import Brightness4Icon from "@material-ui/icons/Brightness4";
 import Brightness7Icon from "@material-ui/icons/Brightness7";
 
 import ThemeContext from "../Context/ThemeContext";
-import { UserContext, UserConsumer } from "../Context/UserContext";
+import { UserConsumer } from "../Context/UserContext";
 
 const useStyles = makeStyles({
   root: {
@@ -29,7 +29,7 @@ export default function BottomNavbar(props) {
 
   const { dark, toggle } = useContext(ThemeContext);
   // const { filterUsers } = useContext(UserContext);
-  // console.log(props)
+  // console.log(userContext)
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
