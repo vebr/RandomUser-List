@@ -1,3 +1,57 @@
+:root {
+  --border: rgba(0,0,0,.2);
+  --shadow: #000;
+  --heading: rgba(255,100,0,1);
+  --main: #1d8f13;
+  --text: #000;
+  --textAlt: #fff;
+  --inactive: rgba(0,0,0,.3);
+  --background: #fff;
+  --backgroundButton: #fff;
+  --backgroundNavbar:#FF7701;
+  --textButton:#FF7701;
+}
+
+
+body {
+  background: var(--backgroundBody);
+}
+
+h1, 
+p { 
+  color: var(--text); 
+}
+
+.MuiCard-root {
+  background: var(--background) !important;
+}
+
+.MuiBottomNavigation-root {
+  background: var(--backgroundNavbar) !important;
+  color: var(--text); 
+}
+
+.MuiTypography-root {
+  color: var(--text) !important;
+}
+
+.MuiButtonBase-root .Mui-selected {
+  color: var(--textButton) !important;
+}
+
+.Mui-selected {
+  color: var(--textButton) !important;
+}
+
+.card__container button {
+  background: var(--backgroundButton);
+  color: var(--text);
+}
+
+h2 { 
+  color: var(--heading); 
+}
+
 .App {
   text-align: center;
 }
@@ -19,4 +73,25 @@
 
 .App-link {
   color: #09d3ac;
+}
+
+.Mui-selected {
+  color:black;
+}
+
+@media (min-width: 960px) {
+  .card__container {
+      display: flex;
+      flex-wrap: nowrap;
+      height: 70vh;
+      overflow-x: auto;
+      width: auto;
+  }
+}
+
+@media (max-width: 960px) {
+  .card__container {
+    height: 100vh;
+    overflow: auto;
+  }
 }
