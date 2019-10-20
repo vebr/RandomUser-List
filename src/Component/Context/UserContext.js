@@ -1,34 +1,38 @@
 import * as React from "react";
 
 export const UserContext = React.createContext(
-    // default values used by a Consumer when it does not have a
-    // matching Provider above it in the tree, useful for testing.
-    {
-      userContext: {
-        users: [],
-      }
-    }
-  );
-  
+  // default values used by a Consumer when it does not have a
+  // matching Provider above it in the tree, useful for testing.
+  {
+    userContext: {
+      users: [],
+    },
+    filterUsers: () => {},
+    filterCity: () => {},
+  }
+);
 
 export default class UserProvider extends React.Component {
   constructor() {
     super();
     this.state = {
-    //   setRates: this.setRates.bind(this),
-    //   setValue: this.setValue.bind(this),
-    //   addCurrency: this.addCurrency.bind(this),
-    //   removeCurrency: this.removeCurrency.bind(this),
-      users: [],
+      filterUsers: this.filterUsers.bind(this),
+      filterCity: this.filterCity.bind(this),
+      //   setValue: this.setValue.bind(this),
+      //   addCurrency: this.addCurrency.bind(this),
+      //   removeCurrency: this.removeCurrency.bind(this),
+      users: this.users.bind(this),
       defaultValue: 10,
       isFetching: false,
     };
   }
 
+  users = users => {
+    this.setState({ users });
+  };
+
   fetchData() {
-    fetch(
-      "https://randomuser.me/api/?results=10"
-    )
+    fetch("https://randomuser.me/api/?results=10")
       .then(this.setState({ isFetching: true }))
       .then(res => res.json())
       .then(data => {
@@ -40,17 +44,32 @@ export default class UserProvider extends React.Component {
 
   componentDidMount() {
     this.fetchData();
-   }
+  }
 
-//   setRates(updateBase) {
-//     this.setState({ updateBase });
-//     this.fetchNewData(updateBase);
-//   }
+  filterUsers() {
+    let { users } = this.state;
+    let data = users.sort((a, b) => (a.dob.age > b.dob.age ? 1 : -1));
+    this.setState({
+      users: data,
+    });
+  }
 
-//   setValue(updateValue) {
-//     this.setState({ ...updateValue });
-//   }
-
+  filterCity() {
+    let { users } = this.state;
+    let data = users.sort(function(a, b) {
+      if (a.location.city < b.location.city) {
+        return -1;
+      }
+      if (a.location.city > b.location.city) {
+        return 1;
+      }
+      return 0;
+    });
+    this.setState({
+      users: data,
+    });
+    console.log(data);
+  }
 
   render() {
     return (
@@ -66,3 +85,5 @@ export default class UserProvider extends React.Component {
     );
   }
 }
+
+export const UserConsumer = UserContext.Consumer;

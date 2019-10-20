@@ -6,22 +6,27 @@ import Container from "@material-ui/core/Container";
 import Header from "../Component/Partials/Header";
 import BottomNavbar from "../Component/Partials/BottomNavigation";
 import Hidden from "@material-ui/core/Hidden";
+import UserProvider from "../Component/Context/UserContext";
 
 const Template = ({ pageTitle, children }) => (
   <div>
-    <Helmet>
-      <title>{pageTitle}</title>
-    </Helmet>
+    <UserProvider>
+      <Helmet>
+        <title>{pageTitle}</title>
+      </Helmet>
 
-    <Hidden smDown>
-      <Header />
-    </Hidden>
+      <Hidden smDown>
+        <Header />
+      </Hidden>
 
-    <Hidden mdUp>
-      <BottomNavbar />
-    </Hidden>
-    
-    <Container maxWidth="lg" className="outer-container">{children}</Container>
+      <Hidden mdUp>
+        <BottomNavbar />
+      </Hidden>
+
+      <Container maxWidth="lg" className="outer-container">
+        {children}
+      </Container>
+    </UserProvider>
   </div>
 );
 

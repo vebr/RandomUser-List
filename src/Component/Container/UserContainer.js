@@ -1,28 +1,27 @@
-import React, { useContext }  from "react";
+import React, { useContext } from "react";
 import UserCard from "../Card";
 // import UserProvider from '../Context/UserContext';
 
-import {UserContext} from "../Context/UserContext";
+import { UserContext, UserConsumer } from "../Context/UserContext";
 
 function UserContainer(props) {
-
-  const {userContext} = useContext(UserContext);
-  const data = userContext.users; 
-  console.log(data);
+  const { userContext } = useContext(UserContext);
+  const data = userContext.users;
+  // console.log(UserConsumer);
 
   let items = Object.keys(data).map((key, index) => (
-    <UserCard
-      key={index}
-      item={key}
-      index={index}
-      value={data[key]}
-    />
+    <UserCard key={index} item={key} index={index} value={data[key]} />
   ));
 
   return (
-    <div className="card__container">
-    { data ? items : "-"}
-    </div>
+    <UserConsumer>
+      {props => {
+        console.log("dsa",props)
+        return <div props={props} className="card__container">
+          {data ? items : "-"}
+        </div>;
+      }}
+    </UserConsumer>
   );
 }
 

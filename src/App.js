@@ -7,9 +7,7 @@ import UserContainer from "./Component/Container/UserContainer";
 function App() {
   return (
     <Template className="App">
-      <UserProvider>
-        <UserContainer />
-      </UserProvider>
+      <UserContainer />
     </Template>
   );
 }

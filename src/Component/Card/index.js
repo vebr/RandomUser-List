@@ -9,7 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { red } from "@material-ui/core/colors";
-import ClassIcon from '@material-ui/icons/Class';
+import ClassIcon from "@material-ui/icons/Class";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Hidden from "@material-ui/core/Hidden";
 import Grid from "@material-ui/core/Grid";
@@ -85,9 +85,7 @@ function formatDate(date) {
 export default function UserCard(props) {
   const classes = useStyles();
   const user = props.value;
-  // console.log(user)
   const [expanded, setExpanded] = React.useState(false);
-  // const { dark } = useContext(ThemeContext);
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
@@ -192,10 +190,19 @@ export default function UserCard(props) {
         </Hidden>
 
         <CardActions disableSpacing>
-          <IconButton
-            aria-label="show more"
-            >
-            <ClassIcon style={{color:user.dob.age < 21 ? "red" : user.dob.age > 21 && user.dob.age < 56 ? "green" : user.dob.age > 56 ? "blue" : "white"}}/>
+          <IconButton aria-label="show more">
+            <ClassIcon
+              style={{
+                color:
+                  user.dob.age <= 21
+                    ? "red"
+                    : user.dob.age > 21 && user.dob.age < 56
+                    ? "green"
+                    : user.dob.age >= 56
+                    ? "blue"
+                    : "white",
+              }}
+            />
           </IconButton>
           <IconButton
             className={clsx(classes.expand, {
