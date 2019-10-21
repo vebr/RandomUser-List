@@ -20,7 +20,6 @@ export default class UserProvider extends React.Component {
     this.state = {
       filterCity: this.filterCity.bind(this),
       filterUsers: this.filterUsers.bind(this),
-      fetchData: this.fetchData.bind(this),
       loadMore: this.loadMore.bind(this),
       users: [],
       moreItemsLoading: false,
@@ -34,41 +33,27 @@ export default class UserProvider extends React.Component {
     this.setState({ users });
   };
 
-  fetchData() {
-    fetch("https://randomuser.me/api/?results=10")
-      .then(this.setState({ isFetching: true }))
-      .then(res => res.json())
-      .then(data => {
-        let { results } = data;
-        this.setState({ users: results, isFetching: false });
-      })
-      .catch(console.log);
-  }
-
   async loadMore() {
     let { users } = this.state;
-    console.log(users.length);
-    if (users.length >= 100) {
-      return null;
+    let data;
+    const cachedUsers = localStorage.getItem("users");
+    if (cachedUsers == null) {
+      data = 0;
     } else {
+      data = JSON.parse(cachedUsers).length;
+    }
+
+    if (data < 100) {
       const response = await fetch("https://randomuser.me/api/?results=10")
         .then(this.setState({ isFetching: true }))
-        // .then(res => res.json())
-        // .then(data => {
-        //   let { results } = data;
-        //   let { users } = this.state;
-        //   this.setState({ users: users.concat(results), isFetching: false });
-        // })
         .catch(console.log);
       const json = await response.json();
+      localStorage.setItem("users", JSON.stringify(users.concat(json.results)));
       this.setState({ users: users.concat(json.results), isFetching: false });
-      console.log(users);
+    } else {
+      this.setState({ users: JSON.parse(cachedUsers), isFetching: false });
     }
   }
-
-  // componentDidMount() {
-  //   this.fetchData();
-  // }
 
   filterUsers() {
     let { users } = this.state;

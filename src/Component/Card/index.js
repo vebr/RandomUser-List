@@ -1,22 +1,20 @@
 import React from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import clsx from "clsx";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardActions from "@material-ui/core/CardActions";
-import Collapse from "@material-ui/core/Collapse";
-import Avatar from "@material-ui/core/Avatar";
-import IconButton from "@material-ui/core/IconButton";
-import Typography from "@material-ui/core/Typography";
-import { red } from "@material-ui/core/colors";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Collapse,
+  Avatar,
+  IconButton,
+  Typography,
+  Grid,
+  Hidden,
+} from "@material-ui/core";
 import ClassIcon from "@material-ui/icons/Class";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Hidden from "@material-ui/core/Hidden";
-import Grid from "@material-ui/core/Grid";
 import Skeleton from "react-loading-skeleton";
-import { LazyLoadImage } from "react-lazy-load-image-component";
-
-// import ThemeContext from "../Context/ThemeContext";
+import { makeStyles } from "@material-ui/core/styles";
+import clsx from "clsx";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -58,9 +56,6 @@ const useStyles = makeStyles(theme => ({
   },
   expandOpen: {
     transform: "rotate(180deg)",
-  },
-  avatar: {
-    backgroundColor: red[500],
   },
 }));
 
@@ -208,21 +203,16 @@ export default function UserCard(props) {
         <Card className={classes.card}>
           <Hidden smDown>
             <CardContent style={{ textAlign: "center" }}>
-              <LazyLoadImage
-                src={user.picture.large}
-                height={120}
-                width={120}
+              <img
+                alt={
+                  user.name.title +
+                  ". " +
+                  user.name.first +
+                  " " +
+                  user.name.last
+                }
+                src={user.picture.large ? user.picture.large : <Skeleton />}
               />
-              {/* <img
-                    src={user.picture.large}
-                    alt={
-                      user.name.title +
-                      ". " +
-                      user.name.first +
-                      " " +
-                      user.name.last
-                    }
-                  /> */}
             </CardContent>
 
             <CardContent>
@@ -262,6 +252,13 @@ export default function UserCard(props) {
                       aria-label="recipe"
                       className={classes.image}
                       src={user.picture.large}
+                      alt={
+                        user.name.title +
+                        ". " +
+                        user.name.first +
+                        " " +
+                        user.name.last
+                      }
                     >
                       {user.name.title +
                         ". " +
