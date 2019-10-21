@@ -143,6 +143,7 @@ h2 {
   display: inline-block;
 }
 
-.inline-block:has(> div) {
-  height: 200px;
-}
+/* .List {
+  min-height: 365px;
+  height: auto !important;
+} */

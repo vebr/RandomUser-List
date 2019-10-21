@@ -36,7 +36,7 @@ Template.propTypes = {
 };
 
 Template.defaultProps = {
-  pageTitle: "React App",
+  pageTitle: "Random User List",
 };
 
 export default Template;
