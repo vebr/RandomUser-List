@@ -13,7 +13,11 @@ Install Depedency
 
 after finish installing depedency
 
-> yarn start
+> yarn start // npm start
+
+build bundle for deploying
+
+> yarn build // npm build
 ```
 
 ## Demo
